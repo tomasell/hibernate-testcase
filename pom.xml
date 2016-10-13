@@ -3,9 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.hibernate.bugs</groupId>
-    <artifactId>test-case</artifactId>
+    <artifactId>HHH-11173</artifactId>
     <version>1.0.0.Final</version>
-    <name>Hibernate Test Case Template</name>
+    <name>HHH-11173</name>
+    <description>Bytecode enhanced lazy collection won't load from cache</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,6 +43,7 @@
             <artifactId>hibernate-testing</artifactId>
             <version>${version.org.hibernate}</version>
         </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -70,6 +72,64 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.hibernate.orm.tooling</groupId>
+                <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                <version>${version.org.hibernate}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.transaction</groupId>
+                        <artifactId>jta</artifactId>
+                        <version>1.1</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <dir>${project.basedir}/target/test-classes/</dir>
+                            <enableLazyInitialization>true</enableLazyInitialization>
+                            <enableDirtyTracking>false</enableDirtyTracking>
+                            <enableAssociationManagement>false</enableAssociationManagement>
+                            <enableExtendedEnhancement>false</enableExtendedEnhancement>
+                            <failOnError>true</failOnError>
+                        </configuration>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.hibernate.orm.tooling</groupId>
+                                        <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                                        <versionRange>${version.org.hibernate}</versionRange>
+                                        <goals>
+                                            <goal>enhance</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental>true</runOnIncremental>
+                                        </execute>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>
