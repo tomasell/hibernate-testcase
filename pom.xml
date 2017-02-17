@@ -13,7 +13,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <version.com.h2database>1.3.176</version.com.h2database>
         <version.junit>4.11</version.junit>
-        <version.org.hibernate>5.2.3.Final</version.org.hibernate>
+        <version.org.hibernate>5.2.8.Final</version.org.hibernate>
         <version.org.slf4j>1.7.2</version.org.slf4j>
     </properties>
 
