@@ -16,10 +16,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * This template demonstrates how to develop a test case for Hibernate ORM,
- * using the Java Persistence API.
- */
 public class JPAUnitTestCase {
 
     private EntityManagerFactory entityManagerFactory;
@@ -30,8 +26,8 @@ public class JPAUnitTestCase {
     }
 
     @Test
-    @TestForIssue(jiraKey = "HHH-10577")
-    public void hhh10577Test() throws Exception {
+    @TestForIssue(jiraKey = "HHH-11515")
+    public void hhh11515Test() throws Exception {
         EntityManager entityManager = this.entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
