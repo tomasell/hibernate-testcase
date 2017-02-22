@@ -4,13 +4,13 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
     version="2.1">
 
-    <persistence-unit name="templatePU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="h2" transaction-type="RESOURCE_LOCAL">
 
-        <description>Hibernate test case template Persistence Unit</description>
+        <description>H2 Persistence Unit</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        
+
         <properties>
             <property name="hibernate.archive.autodetection" value="class, hbm" />
 
@@ -21,7 +21,7 @@
 
             <property name="hibernate.connection.pool_size" value="5" />
 
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
 
@@ -32,8 +32,7 @@
             <property name="hibernate.cache.use_second_level_cache" value="true" />
             <property name="hibernate.cache.use_query_cache" value="true" />
 
-            <!--NOTE: hibernate.jdbc.batch_versioned_data should be set to false when testing with 
-                Oracle -->
+            <!--NOTE: hibernate.jdbc.batch_versioned_data should be set to false when testing with Oracle -->
             <property name="hibernate.jdbc.batch_versioned_data" value="true" />
 
             <property name="javax.persistence.validation.mode" value="NONE" />
@@ -43,4 +42,46 @@
         </properties>
 
     </persistence-unit>
+    
+    <persistence-unit name="sqlserver" transaction-type="RESOURCE_LOCAL">
+
+        <description>SQL Server Persistence Unit</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class, hbm" />
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect" />
+            <property name="hibernate.default_schema" value="dbo" />
+            <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+            <property name="hibernate.connection.url" value="jdbc:sqlserver://localhost:1433;useUnicode=true;characterEncoding=UTF-8;DatabaseName=UnitTesting" />
+            <property name="hibernate.connection.username" value="unit" />
+            <property name="hibernate.connection.password" value="pass" />
+
+            <property name="hibernate.connection.pool_size" value="5" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+
+            <property name="hibernate.max_fetch_depth" value="5" />
+
+            <property name="hibernate.cache.region_prefix" value="hibernate.test" />
+            <property name="hibernate.cache.region.factory_class" value="org.hibernate.testing.cache.CachingRegionFactory" />
+            <property name="hibernate.cache.use_second_level_cache" value="true" />
+            <property name="hibernate.cache.use_query_cache" value="true" />
+
+            <!--NOTE: hibernate.jdbc.batch_versioned_data should be set to false when testing with Oracle -->
+            <property name="hibernate.jdbc.batch_versioned_data" value="true" />
+
+            <property name="javax.persistence.validation.mode" value="NONE" />
+            <property name="hibernate.service.allow_crawling" value="false" />
+            <property name="hibernate.session.events.log" value="true" />
+            <property name="hibernate.globally_quoted_identifiers" value="true" />
+        </properties>
+
+    </persistence-unit>
+
 </persistence>
