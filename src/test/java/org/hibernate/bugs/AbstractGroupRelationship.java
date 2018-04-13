@@ -35,7 +35,7 @@ import javax.persistence.Table;
 public class AbstractGroupRelationship<H extends AbstractHost<H, G, R>, G extends AbstractGroup<H, G, R>, R extends AbstractGroupRelationship<H, G, R>> {
 
     @Id
-    @Column(name = "groupid")
+    @Column(name = "hostgroupid")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
