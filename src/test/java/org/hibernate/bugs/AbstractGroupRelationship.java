@@ -32,7 +32,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
 @Table(name = "hosts_groups")
-public class AbstractGroupRelationship<H extends AbstractHost<H, G, R>, G extends AbstractGroup<H, G, R>, R extends AbstractGroupRelationship<H, G, R>> {
+public abstract class AbstractGroupRelationship<H extends AbstractHost<H, G, R>, G extends AbstractGroup<H, G, R>, R extends AbstractGroupRelationship<H, G, R>> {
 
     @Id
     @Column(name = "hostgroupid")
